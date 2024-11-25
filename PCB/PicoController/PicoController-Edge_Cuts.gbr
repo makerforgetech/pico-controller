@@ -1,0 +1,23 @@
+%TF.GenerationSoftware,KiCad,Pcbnew,7.0.11-7.0.11~ubuntu22.04.1*%
+%TF.CreationDate,2024-11-24T08:43:31+00:00*%
+%TF.ProjectId,PicoController,5069636f-436f-46e7-9472-6f6c6c65722e,rev?*%
+%TF.SameCoordinates,Original*%
+%TF.FileFunction,Profile,NP*%
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 7.0.11-7.0.11~ubuntu22.04.1) date 2024-11-24 08:43:31*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+%TA.AperFunction,Profile*%
+%ADD10C,0.050000*%
+%TD*%
+G04 APERTURE END LIST*
+D10*
+X126746000Y-63804800D02*
+X151282400Y-63804800D01*
+X151282400Y-117703600D01*
+X126746000Y-117703600D01*
+X126746000Y-63804800D01*
+M02*

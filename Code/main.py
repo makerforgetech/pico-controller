@@ -11,7 +11,7 @@ import time
 import utime
 from neopixel import Neopixel
  
-numpix = 30
+numpix = 45
 pin = 1
 
 motion = Pin(0, machine.Pin.IN, Pin.PULL_DOWN)
@@ -117,10 +117,10 @@ while True:
     
     if swthumb.value() == 1:
         pixels.fill(colors[current])
-        pixels.set_pixel_advanced(8, colors[current], brightness + 20)
+        #pixels.set_pixel_advanced(8, colors[current], brightness + 20)
     else:
         pixels.fill(white)
-        pixels.set_pixel_advanced(8, white, brightness + 20)
+        #pixels.set_pixel_advanced(8, white, brightness + 20)
 
         
     
