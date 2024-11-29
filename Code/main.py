@@ -18,28 +18,39 @@ motion = Pin(0, machine.Pin.IN, Pin.PULL_DOWN)
 xthumb = ADC(Pin(27))
 ythumb = ADC(Pin(26))
 swthumb = Pin(2, machine.Pin.IN, Pin.PULL_UP)
-
+input_cooldown = False
+input_threshold_upper = 40000
+input_threshold_lower = 30000
 
 pixels = Neopixel(numpix, 0, pin, "GRB")
 
+# Primary colors
 red = (255, 0, 0)
-orange = (255, 165, 0)
-yellow = (255, 150, 0)
 green = (0, 255, 0)
 blue = (0, 0, 255)
-indigo = (75, 0, 130)
-violet = (138, 43, 226)
 white = (255, 255, 255)
-colors = (red, orange, yellow, green, blue, indigo, violet, white)
 
-current = 5
- 
-yellow = (255, 100, 0)
-orange = (255, 50, 0)
-green = (0, 255, 0)
-blue = (0, 0, 255)
-red = (255, 0, 0)
-color0 = red
+# Secondary colors
+yellow = (255, 255, 0)
+cyan = (0, 255, 255)
+magenta = (255, 0, 255)
+
+# Tertiary colors
+amber = (255, 191, 0)
+vermilion = (227, 66, 52)
+chartreuse = (127, 255, 0)
+spring_green = (0, 255, 127)
+azure = (0, 127, 255)
+violet = (127, 0, 255)
+rose = (255, 0, 127)
+
+# Update the colors list
+colors = (
+    red, green, blue, white, yellow, cyan, magenta,
+    amber, vermilion, chartreuse, spring_green, azure, violet, rose
+)
+
+current = 6
  
 brightness = 6
 pixels.brightness(brightness)
@@ -84,24 +95,33 @@ def fade(min_brightness, max_brightness, step):
 def thumbstick_input():
     global brightness
     global current
+    global input_cooldown
+    global input_threshold_upper, input_threshold_lower
+    if input_cooldown:
+        if xthumb.read_u16() < input_threshold_upper and xthumb.read_u16() > input_threshold_lower and ythumb.read_u16() < input_threshold_upper and ythumb.read_u16() > input_threshold_lower:
+            input_cooldown = False
+        return
     # Change brightness
-    if xthumb.read_u16() > 40000:
+    if xthumb.read_u16() > input_threshold_upper:
         brightness = brightness + 1
         if brightness > 255:
             brightness = 255
-    elif xthumb.read_u16() < 30000:
+    elif xthumb.read_u16() < input_threshold_lower:
         brightness = brightness - 1
         if brightness < 0:
             brightness = 0
+
     # Change colour
-    if ythumb.read_u16() > 40000:
+    if ythumb.read_u16() > input_threshold_upper:
         current = current + 1
         if current >= len(colors):
             current = len(colors)-1
-    elif ythumb.read_u16() < 30000:
+        input_cooldown = True
+    elif ythumb.read_u16() < input_threshold_lower:
         current = current - 1
         if current < 0:
             current = 0
+        input_cooldown = True
     
  
 while True:
@@ -121,9 +141,6 @@ while True:
     else:
         pixels.fill(white)
         #pixels.set_pixel_advanced(8, white, brightness + 20)
-
-        
-    
     
     # Turn off neopixels if idle
     if motion.value() == 1:
