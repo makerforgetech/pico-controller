@@ -132,14 +132,24 @@ while True:
     pixels.brightness(brightness)
     #print(ythumb.read_u16())
     #print(xthumb.read_u16())
-    #print(current)
-    #print(brightness)
+    # print(current)
+    # print(brightness)
     
     if swthumb.value() == 1:
         pixels.fill(colors[current])
         #pixels.set_pixel_advanced(8, colors[current], brightness + 20)
     else:
-        pixels.fill(white)
+        #Fade all pixels except the first 7
+        
+        # Make the first 7 pixels full white
+        for i in range(7):
+            pixels.set_pixel_advanced(i, white, 255)
+        # turn the others off
+        for i in range(7, numpix):
+            pixels.set_pixel_advanced(i, (0,0,0), 0)
+            
+        # pixels.brightness(255)
+        # pixels.fill(white)
         #pixels.set_pixel_advanced(8, white, brightness + 20)
     
     # Turn off neopixels if idle
@@ -150,4 +160,3 @@ while True:
     
     pixels.show()
     time.sleep(.1)
-
