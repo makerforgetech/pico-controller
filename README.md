@@ -14,7 +14,6 @@ Note: This is in active development and is not yet ready for community adoption.
 - Neopixel array
 - 18650 battery management
 
-
 ## Bill of Materials
 
 | Part | Quantity | Description | Link |
@@ -35,3 +34,11 @@ Note: This is in active development and is not yet ready for community adoption.
 | Microwave sensor | 1 | Microwave sensor | - |
 | Momentary push button | 1 | Momentary push button | - |
 | Custom PCB | 1 | Custom PCB | See PCB folder |
+
+## UPS Wiring
+
+![UPS WIRING DIAGRAM](https://github.com/makerforgetech/pico-controller/blob/main/ups_wiring.drawio.svg)
+
+## Pico Controller PCB
+
+[PCB Files - KiCad](https://github.com/makerforgetech/pico-controller/tree/main/PCB/PicoController)
